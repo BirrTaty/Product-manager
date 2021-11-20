@@ -1,21 +1,30 @@
 package ru.netology.manager;
 import ru.netology.domain.Product;
+import ru.netology.domain.Book;
+import ru.netology.domain.Smartphone;
 import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
     private Product [] items = new Product[0];
+    private ProductRepository repository;
 
-    public ProductManager() {
+    public ProductManager(ProductRepository repository) {
+        this.repository = repository;
     }
 
-    publiс void add(Product product) {
+    public ProductManager(){
+
+    }
+
+
+    public void add(Product product) {
         int length = items.length + 1;
-        Product[] tmp = new Product[][length];
+        Product[] tmp = new Product[length];
 
         System.arraycopy(items, 0, tmp, 0, items.length);
 
         int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
+        tmp[lastIndex] = product;
         items = tmp;
     }
 
@@ -38,10 +47,19 @@ public class ProductManager {
             if (book.getAuthor().contains(search)) { // проверим есть ли поисковое слово в данных об авторе
                 return true;
             }
-            if (book.getTitle().contains(search)) {
+            if (book.getName().contains(search)) {
                 return true;
             }
             return false;
+        }
+        if (product instanceof Smartphone){
+            Smartphone smartphone = (Smartphone) product;
+            if (smartphone.getManufacturer().contains(search)) {
+                return true;
+            }
+            if (smartphone.getName().contains(search)) {
+                return true;
+            }
         }
         return false;
     }
