@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Product {
     private int id;
-    private String name;
+    String name;
     private int price;
     @Override
     public boolean equals(Object o) {
