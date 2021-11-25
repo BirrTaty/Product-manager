@@ -1,32 +1,35 @@
 package ru.netology.manager;
+
 import ru.netology.domain.Product;
 import ru.netology.domain.Book;
 import ru.netology.domain.Smartphone;
 import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
-    private Product [] items = new Product[0];
+
     private ProductRepository repository = new ProductRepository();
+
 
     public ProductManager(ProductRepository repository) {
         this.repository = repository;
     }
 
-    public ProductManager(){
+    public ProductManager() {
 
     }
-
 
     public void add(Product product) {
         repository.save(product);
     }
+
     public Product[] getAll() {
         return repository.findAll();
     }
 
+
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
-        for (Product product: repository.findAll()) {
+        for (Product product : repository.findAll()) {
             if (matches(product, text)) {
                 Product[] tmp = new Product[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
@@ -35,6 +38,7 @@ public class ProductManager {
             }
         }
         return result;
+
     }
 
     public boolean matches(Product product, String search) {
@@ -46,9 +50,9 @@ public class ProductManager {
             if (book.getName().contains(search)) {
                 return true;
             }
+
             return false;
-        }
-        if (product instanceof Smartphone){
+        } else if (product instanceof Smartphone) {
             Smartphone smartphone = (Smartphone) product;
             if (smartphone.getManufacturer().contains(search)) {
                 return true;
@@ -56,6 +60,7 @@ public class ProductManager {
             if (smartphone.getName().contains(search)) {
                 return true;
             }
+            return false;
         }
         return false;
     }

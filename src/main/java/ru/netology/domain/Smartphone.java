@@ -1,8 +1,10 @@
 package ru.netology.domain;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -20,6 +22,5 @@ public class Smartphone extends Product {
         super(id, name, price);
         this.manufacturer = manufacturer;
     }
-
 
 }
